@@ -13,27 +13,27 @@ const oldPointStructure = {
 };
 
 function oldScrabbleScorer(word) {
-	word = word.toUpperCase();
-	let letterPoints = "";
- 
-	for (let i = 0; i < word.length; i++) {
- 
-	  for (const pointValue in oldPointStructure) {
- 
-		 if (oldPointStructure[pointValue].includes(word[i])) {
-			letterPoints += `Points for '${word[i]}': ${pointValue}\n`
-		 }
- 
-	  }
-	}
-	return letterPoints;
- }
+  word = word.toUpperCase();
+  let letterPoints = "";
+  for (let i = 0; i < word.length; i++) {
+
+    for (const pointValue in oldPointStructure) {
+
+      if (oldPointStructure[pointValue].includes(word[i])) {
+        letterPoints += `Points for '${word[i]}': ${pointValue}\n`
+      }
+
+    }
+  }
+  return letterPoints;
+}
 
 // your job is to finish writing these functions and variables that we've named //
 // don't change the names or your program won't work as expected. //
 
 function initialPrompt() {
-   console.log("Let's play some scrabble! Enter a word:");
+  let myWord = input.question("Let's play some scrabble! Enter a word:")
+  return myWord;
 };
 
 let simpleScore;
@@ -44,29 +44,29 @@ let scrabbleScore;
 
 const scoringAlgorithms = [];
 
-function scorerPrompt() {}
+function scorerPrompt() { }
 
-function transform() {};
+function transform() { };
 
 let newPointStructure;
 
 function runProgram() {
-   initialPrompt();
-   
+  let scoreWord = initialPrompt();
+  console.log(oldScrabbleScorer(scoreWord));
 }
 
 // Don't write any code below this line //
 // And don't change these or your program will not run as expected //
 module.exports = {
-   initialPrompt: initialPrompt,
-   transform: transform,
-   oldPointStructure: oldPointStructure,
-   simpleScore: simpleScore,
-   vowelBonusScore: vowelBonusScore,
-   scrabbleScore: scrabbleScore,
-   scoringAlgorithms: scoringAlgorithms,
-   newPointStructure: newPointStructure,
-	runProgram: runProgram,
-	scorerPrompt: scorerPrompt
+  initialPrompt: initialPrompt,
+  transform: transform,
+  oldPointStructure: oldPointStructure,
+  simpleScore: simpleScore,
+  vowelBonusScore: vowelBonusScore,
+  scrabbleScore: scrabbleScore,
+  scoringAlgorithms: scoringAlgorithms,
+  newPointStructure: newPointStructure,
+  runProgram: runProgram,
+  scorerPrompt: scorerPrompt
 };
 
