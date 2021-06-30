@@ -33,7 +33,7 @@ function oldScrabbleScorer(word) {
 // don't change the names or your program won't work as expected. //
 
 function initialPrompt() {
-  let myWord = input.question("Let's play some scrabble!\n\nEnter a word to score:")
+  let myWord = input.question("Enter a word to score: ");
   return myWord;
 };
 
@@ -60,11 +60,11 @@ let vowelBonusScore = function(word) {
 };
 
 let scrabbleScore = function(word) {
-  word = word.toUpperCase();
+  word = word.toLowerCase();
   let score = 0;
 
   for (let i = 0; i < word.length; i++) {
-    score += Number(newPointStructure[word[i]]);
+    score += newPointStructure[word[i]];
   }
   return score;
 };
@@ -76,28 +76,36 @@ const scoringAlgorithms = [
 ];
 
 function scorerPrompt() {
-  let selectedScoreObject = Number(input.question(`Which scoring algorithm would you like to use?\n
+  let algorithmChoice;
+  while (algorithmChoice < 0 || algorithmChoice > 2 || isNaN(algorithmChoice)) {
+    algorithmChoice = Number(input.question(`Which scoring algorithm would you like to use?\n
 0 - Simple: One point per character
 1 - Vowel Bonus: Vowels are worth 3 points
 2 - Scrabble: Uses scrabble point system
 Enter 0, 1, or 2: `));
-  return scoringAlgorithms[selectedScoreObject];
+  }
+  return scoringAlgorithms[algorithmChoice];
 }
 
 function transform(oldStructure) {
   let newStructure = {};
   for (let key in oldStructure) {
     for (let i = 0; i < oldStructure[key].length; i++) {
-      newStructure[oldStructure[key][i]] = key;
+      newStructure[`${oldStructure[key][i].toLowerCase()}`] = Number(key);
     }
   }
+
   return newStructure;
 };
 
 let newPointStructure = transform(oldPointStructure);
 
 function runProgram() {
-  let word = initialPrompt();
+  console.log("Let's play some scrabble!\n");
+  let word = '';
+  while (!isNaN(word)) {
+    word = initialPrompt();
+  }
   let selectedAlgorithm = scorerPrompt();
   console.log(`Score for '${word}': ${selectedAlgorithm.scoringFunction(word)}`);
 }
